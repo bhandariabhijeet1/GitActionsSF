@@ -1,0 +1,45 @@
+<aura:component >
+    <aura:attribute name='ruleCategory' type='Object'/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    <aura:registerEvent name="RuleCategoryActionEvent" type="c:RuleCategoryActions"/> 
+    
+    <div aura:id ='buttonSection' class='show-buttons'>
+      		<button class="slds-button slds-button--neutral" onclick = '{!c.editCat}'>Edit Category</button> 
+            <button class="slds-button slds-button--neutral" onclick = '{!c.backLink}'>Back</button>
+    </div>
+    
+	<table class="slds-table slds-m-top--small slds-table--fixed-layout">  
+    	<tr>
+          
+            <td>
+                <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+  					<div class="slds-form-element__control">
+                        <label class="slds-form-element__label" for="select-01">Rule Category</label> 
+  					</div>
+  				</div>
+            </td>
+            <td>
+                <div class="slds-form-element padding-top-small width-1of1">
+  					<div class="slds-form-element__control">                           						
+      			        <ui:outputText value="{!v.ruleCategory.Rule_Category__c}"/>
+  					</div>
+  				</div>
+            </td>   
+            
+              <td>
+                <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+       				<div class="slds-form-element__control">    
+                        <label class="slds-form-element__label" for="select-01">Rule Type</label>                                      					                      				
+       				</div>
+       			</div>
+            </td>
+            <td>
+                <div class="slds-form-element padding-top-small width-1of1">
+                	<ui:outputText value="{!v.ruleCategory.Rule_Type__c}"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    
+</aura:component>

@@ -1,0 +1,401 @@
+<aura:component controller="RuleBuilderController" >
+    <aura:attribute name='showRuleSelectionOverlay' type='boolean' default='false'/>
+    <aura:attribute name='combinationConstructed' type='String' default='new'/>
+    <aura:attribute name="mode" type="String" />
+    <aura:attribute name="ruleId" type="String" />     
+    <aura:attribute name="selectedBoolVal" type='String'/>  
+    <aura:attribute name='newRuleCombination' type='Rule_Combination__c' default="{'sobjectType': 'Rule_Combination__c'}"/> 
+    <aura:attribute name="ruleCombinationValue" type="String" />  
+    <aura:attribute name="ruleCombinationId" type="String" />   
+    <aura:attribute name="CodeSearchLink" type="String" />     
+    <aura:attribute name="showautosuggestedlist" type="Boolean" />
+    <aura:attribute name="selectedRules" type="Object[]" />
+    <aura:attribute name="selectedRuleDesc" type="Object[]" />
+    <aura:attribute name="selectedRulesforANY" type="Object[]" />
+    <aura:attribute name="selectedRulesforANYMap" type="Object[]" />
+    <aura:attribute name='anyOperator' type='String'/> 
+    <aura:attribute name='anyValue' type='String'/> 
+    <aura:attribute name='anyCashedObject' type='Object'/> 
+    <aura:attribute name='anyIndex' type='Integer' default="1"/>
+    <aura:attribute name='allOperators' type='String[]'/>     
+    <aura:attribute name='combinationMap' type='Object'/>
+    <aura:attribute name='selectedRulesList' type='Object'/>
+    <aura:attribute name='srcIndex' type='Integer'/>
+    <aura:attribute name='desIndex' type='Integer'/>
+    <aura:attribute name="showANYOFTable" type="Boolean" default='false' />
+    <aura:attribute name="showRuleListTable" type="Boolean" default='true' />
+    <aura:attribute name="isCombinationBuilderPage" type="Boolean" default='false' />
+    <aura:attribute name="combinationOperator" type='String' />
+    <aura:attribute name='anyError' type='String'/>
+    <aura:attribute name='cachedRuleCombination' type='String'/>
+    <aura:attribute name='cachedRuleCombinationDesc' type='String'/>
+    <aura:attribute name='overlayRules' type='Object[]'/>
+    <aura:attribute name='invalidRules' type='String' default='-'/>
+    <aura:attribute name='combinationANYMap' type="Object[]"/>
+    <aura:attribute name='ruleDescMap' type="Object"/>
+    <aura:attribute name="cachedSelectedRules" type="Object[]" />
+    <aura:attribute name="cachedSelectedRulesforANY" type="Object[]" />
+    <aura:attribute name="cachedCombinationMap" type="Object" />
+    <aura:attribute name="cachedShowANYOFTable" type="Boolean" />
+    <aura:attribute name='currentSessionSelectedRules' type='Object[]'/>
+    <aura:attribute name='currentTabSelectedRules' type='Object[]'/>
+    <aura:attribute name="showRuleCombListTable" type="Boolean" default='false'/>
+    <aura:attribute name="ruleCombinationWithExp" type="String"/>
+    <aura:attribute name='ruleIdList' type='Object[]'/>
+    <aura:attribute name='ruleDescList' type='Object[]'/>
+    <aura:attribute name='ruleIdMap' type='String'/>
+    <aura:attribute name="cachedRuleCombinationWithExp" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.newRuleCombination.Rule_Combination_Description__c}" action="{!c.clearMessage}"/>
+    <aura:handler name="AutosuggestionEvent" event="c:AutoSuggestionEvent" action="{!c.populateSymtom}"/>    
+    <aura:handler name="ConstructCombination" event="c:ConstructCombination" action="{!c.populateCombinationString}"/>    
+    <aura:handler event="c:RuleListEvents" action="{!c.handleListEvents}" />
+    <aura:handler name="ConstructANYList" event="c:ConstructANYList" action="{!c.populateANYCombinationString}"/>    
+    
+    <aura:registerEvent name="RuleActionEvent" type="c:RuleActions"/>
+    
+    <aura:attribute name="isShowGenericMessage" type="Boolean" default="false" /> 
+    <aura:attribute name="genericMessage" type="String" />   
+    <aura:attribute name="genericMessageAction" type="String" />   
+    <aura:attribute name="positiveResponse" type="String" />   
+    <aura:attribute name="negativeResponse" type="String" />   
+    <aura:attribute name="isConfirmation" type="boolean" /> 
+    
+    <aura:handler name='hideGenericMessage' event="c:HideGenericMessage" action="{!c.handleActionConfirmation}"/>      
+    
+    <span>
+        <aura:if isTrue='{!v.showRuleSelectionOverlay}'>
+            <span>
+                <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-modal--large slds-fade-in-open slds-show" aura:id='selectRuleDialog' >
+                    <div class="slds-modal__container container-custom">
+                        <div class="slds-modal__header modal_header_background">
+                            <table class="slds-table ReducePadding smallInput">
+                                <tr>
+                                    <td class="floatLeft">                                       
+                                        <aura:if isTrue="{!v.invalidRules != '-'}">  
+                                            <c:Message severity="warning" MessageString="{!'Please select operator(s) for '+  v.invalidRules}" MessageShowFlag="{!v.DisplayMessage}"/>
+                                        </aura:if>                                        
+                                    </td>
+                                    <td class="btnRight">                                    
+                                        <button class="slds-button slds-button--brand slds-button_small" onclick="{!c.doneRulesSelection}">Done</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.closeOverlay}">
+                                <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/close_sqr.png')}" height="20" width="30"/>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                        <div class="slds-modal__content slds-p-around--small modal-custom">                            
+                            <div class="slds-tabs--scoped">                                                                
+                                <ul class="slds-tabs--scoped__nav " role="tablist">        
+                                    <li class="slds-tabs--scoped__item slds-text-heading--label slds-active custom-tab-item " title="Rule Library"
+                                        role="presentation" aura:id='tab-item-1'>
+                                        <a  class="slds-tabs--scoped__link"  onclick = "{!c.switchTab}" data-tab='1' role="tab" tabindex="0" aria-selected="true" aria-controls="tab-scoped-1" id="tab-scoped-1__item">Library of Rules</a>
+                                    </li>                        
+                                    <li class="slds-tabs--scoped__item slds-text-heading--label custom-tab-item " title="Combination Library"
+                                        role="presentation"  aura:id='tab-item-2'>
+                                        <a  class="slds-tabs--scoped__link" data-tab='2'  onclick = "{!c.switchTab}"  role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-2" id="tab-scoped-2__item">Library of Combinations</a>
+                                    </li>
+                                </ul>
+                                <div class='tab-content-section'>
+                                    <div id="tab-scoped-1" aura:id='tab-content-1' class='fav-list-container'  role="tabpanel" aria-labelledby="tab-scoped-1--item">   			
+                                        <!--<div class="headingLeft">Select Rules To Create Combination</div>-->
+                                        <aura:if isTrue='{!v.showRuleListTable}'>                           
+                                            <div aura:id='ruleListContainer' class='ruleListContainer'>                  
+                                                <c:RuleListView combinationBuilderPage='{!v.isCombinationBuilderPage}' selectedRules='{!v.combinationMap}' combinationBuilderPageANY='{!v.showANYOFTable}' overlayRules='{!v.overlayRules}' currentSessionSelectedRules='{!v.currentSessionSelectedRules}' currentTabSelectedRules='{!v.currentTabSelectedRules}'/>
+                                            </div> 
+                                        </aura:if>
+                                    </div>
+                                    <div id="tab-scoped-2" aura:id='tab-content-2' class='fav-list-container slds-hide' role="tabpanel" aria-labelledby="tab-scoped-2--item">			 
+                                        <aura:if isTrue='{!v.showRuleCombListTable}'>
+                                            <div aura:id='ruleCombListContainer' class='ruleListContainer'>                 
+                                                <c:RuleCombinationListView combinationBuilderPage='{!v.isCombinationBuilderPage}' selectedRules='{!v.combinationMap}' combinationBuilderPageANY='{!v.showANYOFTable}' overlayRules='{!v.overlayRules}' currentSessionSelectedRules='{!v.currentSessionSelectedRules}' currentTabSelectedRules='{!v.currentTabSelectedRules}'/>
+                                            </div>                                      
+                                        </aura:if>
+                                    </div>                                    
+                                </div>
+                            </div>                            
+                        </div>
+                        <aura:if isTrue='{!v.showANYOFTable}'>
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--striped">
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="slds-form-element">
+                                            <tr>
+                                                <td>
+                                                    <aura:if isTrue='{!v.selectedRules.length > 0}'>
+                                                        <div title="Select an operator">
+                                                            <ui:inputSelect aura:id="combinationOperator" class='slds-select' value="{!v.combinationOperator}">
+                                                                <ui:inputSelectOption text="None" label="--None--"/>
+                                                                <ui:inputSelectOption text="AND" label="AND"/>
+                                                                <ui:inputSelectOption text="OR" label="OR"/>
+                                                            </ui:inputSelect>
+                                                        </div>
+                                                    </aura:if>
+                                                </td>
+                                                <td>
+                                                    <div title="Select an operator in which you want your ‘ANY OF’ combination to meet in relation to the number you are entering.">
+                                                        <ui:inputSelect aura:id="anyOperator" class='slds-select' value="{!v.anyOperator}">
+                                                            <ui:inputSelectOption text="None" label="--None--"/>
+                                                            <aura:iteration items="{!v.allOperators}" var="opOption">
+                                                                <ui:inputSelectOption text="{!opOption}" label="{!opOption}"/>
+                                                            </aura:iteration>
+                                                        </ui:inputSelect>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div title="Enter a number in which you want your ‘ANY OF’ combination to meet in relation your chosen operator.">
+                                                        <ui:inputText aura:id="anyValue"
+                                                                      class="slds-input slds-truncate"
+                                                                      labelClass="slds-form-element__label"
+                                                                      placeholder="#"
+                                                                      value="{!v.anyValue}"/>
+                                                    </div>
+                                                </td>                                                
+                                                <td>
+                                                    <button class="slds-button slds-button--brand" onclick= '{!c.addAnyOfExpression}'>Done</button>
+                                                </td>
+                                                <td>
+                                                    <div class="errorMsg">{!v.anyError}</div>
+                                                </td>
+                                                <td>
+                                                    <button class="slds-button slds-button--brand" onclick= '{!c.cancelANYTable}'>Cancel</button>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </aura:if>
+                        <aura:if isTrue='{!v.selectedRules.length > 0}'>                            
+                            <div id="footer" class="slds-modal__footer slds-scrollable--x slds-scrollable--y" >
+                                <table class="slds-table slds-table--bordered slds-table--cell-buffer  ReducePadding">
+                                    <thead>
+                                        <tr class="slds-text-title--caps table-header-row">
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Combine With">Re-Order</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Combine With">Combined</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Rule Id">Rule Id</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Rule Description">Rule Description</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Remove rule selection">Remove</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <aura:iteration items='{!v.selectedRules}' var='rule' indexVar="i">                                                    
+                                            <tr aura:id="trRule" data-ruleid="{!rule.ruleId}" class="{!(v.srcIndex == i || v.desIndex==i) ? 'highLightRowSwap' : !rule.operator ? 'highLightRow' : ''}">
+                                                <td aura:id="tdRule" data-label="Re-Order"><div class="slds-size--2-of-8">
+                                                    <ui:inputText aura:id="newPosition"
+                                                                  class="slds-input smallInput"
+                                                                  labelClass="slds-form-element__label"
+                                                                  updateOn="keyup"
+                                                                  keyup="{!c.handleReOrder}"
+                                                                  label="{!i+1+' to '}"/>
+                                                    </div></td>
+                                                <td data-label="Combine With Operator"><div class="slds-truncate">{!rule.operator} {!rule.anyOperator}</div></td>
+                                                <td data-label="Rule Id" ><div class="slds-cell-wrap">{!rule.ruleId}</div></td>
+                                                <td data-label="Rule Description" ><div class="slds-cell-wrap">{!rule.ruledesc}</div></td>
+                                                <td data-label="Uncheck Rule">
+                                                    <div class="slds-truncate">
+                                                        <a>
+                                                            <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/remove-from-list.png')}" height="15" width="15" data-index="{!i}" onclick='{!c.removeRuleFromOverlay}'/>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>                
+                                </table>
+                            </div>                            
+                        </aura:if>                        
+                    </div>
+                </div>
+                <div class="slds-backdrop slds-backdrop--open"></div>
+            </span>
+        </aura:if> 
+    </span>    
+    <div>
+        <div class="slds-grid">
+            <h2 class='header1'>
+                <aura:if isTrue="{!v.mode == 'Edit'}">Edit Rule Combination</aura:if>
+                <aura:if isTrue="{!v.mode == 'Clone'}">Clone Rule Combination</aura:if>
+                <aura:if isTrue="{! v.mode != 'Edit' &amp;&amp;  v.mode != 'Clone'}">
+                    Create New Rule Combination
+                </aura:if>
+            </h2>
+        </div>
+        <div class="slds-form new-rule-form">
+            <table class="slds-table slds-m-top--small slds-table--fixed-layout ">                  
+                <tr>
+                    <td class="slds-text-align--right slds-align-top">
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <div class="slds-form-element__control">    
+                                <label class="slds-form-element__label" for="select-01">
+                                    <abbr class="slds-required" title="required">*</abbr>Rule Combination</label>                                      					                      				
+                            </div>
+                            <div class="slds-form-element__control">
+                                <a onclick= '{!c.selectRules}' target='_top'> Construct Rule Combination</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="slds-form-element width-1of1">
+                            <span class="slds-form-element is-required width-1of1 padding-top-small" >                
+                                <ui:inputTextArea aura:id='CombinationText' rows="5" cols="8" class="slds-textarea" value='{!v.newRuleCombination.Rule_Combination__c}' placeholder="Rule Combination" 
+                                                  updateOn="keyup" keyup="{!c.populateCombinationDescription}"/> 
+                                <ui:inputText aura:id='CombinationTextWithExp' class="slds-hide" value='{!v.newRuleCombination.Rule_Combination_With_Exp__c}'/> 
+                            </span>                	 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="slds-text-align--right slds-align-top">
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <div class="slds-form-element__control">    
+                                <label class="slds-form-element__label" for="select-01">
+                                    <abbr class="slds-required" title="required">*</abbr>Rule Combination Description</label>                                      					                      				
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="3">
+                        <div class="slds-form-elementwidth-1of1">
+                            <span class="slds-form-element is-required width-1of1 padding-top-small" >                
+                                <ui:inputTextArea aura:id='CombinationDesc' value='{!v.newRuleCombination.Rule_Combination_Description__c}' readonly="true" rows="5" cols="8" class="slds-textarea" />
+                            </span>                	 
+                        </div>
+                    </td>
+                </tr>        
+                <tr>
+                    <td>
+                        <div class="slds-form-element is-required width-1of1 padding-top-small slds-text-align--right" >
+                            <label class="slds-form-element__label" for="text-input-ICDText">
+                                <abbr class="slds-required" title="required">*</abbr>ICD </label>    			
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-input-has-icon slds-input-has-icon--right">
+                            <span class="slds-icon__container slds-icon-utility-search slds-input__icon iconTopPadding">
+                                <a onclick='{!c.openICDLookup}' href="#">
+                                    <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/SearchIcon.png')}"/>
+                                </a>
+                            </span>
+                            <ui:inputText aura:id='ICDText' class="slds-input" value='{!v.newRuleCombination.Rule_ICD__c}' placeholder="ICD of Diagnosis for Rule" updateOn="keyup" keyup="{!c.clearErrors}"/> 
+                        </div>   
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required width-2of2 padding-top-small slds-text-align--right" >
+                            <label class="slds-form-element__label" for="text-input-ICDDescText">
+                                <abbr class="slds-required" title="required">*</abbr>ICD Description</label>    			
+                        </div>
+                    </td>
+                    <td >
+                        <div class="slds-form-element is-required width-2of2 padding-top-small" >  		    	
+                            <ui:inputTextArea aura:id='ICDDescText' class="slds-input" value='{!v.newRuleCombination.Rule_Diagnosis__c}' placeholder="ICD Description" updateOn="keyup" keyup="{!c.clearErrors}" rows="3"/>
+                        </div>
+                    </td>
+                    <td>
+                        
+                    </td>            
+                </tr>
+                <tr>
+                    <td class="slds-text-align--right slds-align-top" colspan="1">
+                        <div class="slds-form-element padding-top-small">
+                            <div class="slds-form-element__control"> 
+                                <label class="slds-form-element__label" for="text-input-ICDText">
+                                    Activate Rule Combination 
+                                </label>                            
+                            </div>
+                        </div>                         
+                    </td>                              	
+                    <td class="slds-text-align--left slds-align-top">
+                        <div class="slds-form-element padding-top-very-small">
+                            <div>
+                                <ui:inputCheckbox aura:id="combStatus" value="{!v.newRuleCombination.Is_Active__c}"/>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required width-2of2 padding-top-small slds-text-align--right" >
+                            <label class="slds-form-element__label" for="selectGender">Gender</label> 
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required width-2of2 padding-top-small" >  		    	
+                            <div class="slds-form-element__control">                           						
+                                <ui:inputSelect aura:id="selectGender" class='slds-select' value='{!v.newRuleCombination.Gender__c}'>
+                                    <ui:inputSelectOption text="U" label="Unspecified"/>
+                                    <ui:inputSelectOption text="M" label="Male"/>
+                                    <ui:inputSelectOption text="F" label="Female"/>
+                                </ui:inputSelect>       					
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        
+                    </td> 
+                </tr>
+            </table>    
+            <div class='button-div'>
+                <button class="slds-button slds-button--neutral" onclick = '{!c.saveRuleCombination}'> Save Rule Combination</button>
+                <button class="slds-button slds-button--neutral" onclick = '{!c.cancel}'> Cancel</button>
+            </div>
+            <br/>
+            <br/>
+            <div aura:id="SelectedRuleList">
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer my-table--striped rule-table">
+                    <thead>
+                        <tr class="slds-text-title--caps table-header-row">  
+                            <th scope="col">
+                                <div class="slds-truncate font-weight-bold" title="Combine With ">Combined</div>
+                            </th>						
+                            <th scope="col">
+                                <div class="slds-truncate font-weight-bold" title="Rule ">Rule </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate font-weight-bold" title="Rule Description">Rule Description</div>
+                            </th>                            
+                            <th scope="col">
+                                <div class="slds-truncate" title="Remove rule selection">Remove</div>
+                            </th>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items='{!v.selectedRules}' var='rule' indexVar="i">
+                            <tr>     
+                                <td data-label="Operator">
+                                    <div class="slds-truncate ID-col" title="Operator">{!rule.operator} {!rule.anyOperator}</div>
+                                </td>							
+                                <td data-label="ICD Code">
+                                    <div class="slds-truncate ID-col" title="ICD">{!rule.ruleId}</div>
+                                </td>	
+                                <td data-label="ICD Desc">
+                                    <div class="slds-cell-wrap desc-col" title="ICD">{!rule.ruledesc}</div>
+                                </td>                                
+                                <td data-label="Uncheck Rule">
+                                    <div class="slds-truncate">
+                                    	<a>
+                                        	<img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/remove-from-list.png')}" height="15" width="15" data-index="{!i}" onclick="{!c.removeRuleFromList}"/>
+                                    	</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <aura:if isTrue='{!v.isShowGenericMessage}'>
+        <c:GenericMessage isShow='{!v.isShowGenericMessage}'  isConfirmation='{!v.isConfirmation}' action='{!v.genericMessageAction}' message='{!v.genericMessage}' positiveResponse="{!v.positiveResponse}" negativeResponse="{!v.negativeResponse}"/>
+    </aura:if>
+</aura:component>

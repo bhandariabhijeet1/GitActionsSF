@@ -1,0 +1,322 @@
+<aura:component controller="RuleBuilderController" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="AutosuggestionEvent" event="c:AutoSuggestionEvent" action="{!c.populateSymtom}"/>
+        
+    <aura:attribute name="allTypes" type="String[]" />
+    <aura:attribute name="mode" type="String" />    
+    <aura:attribute name="typeCategoryMap" type="Object" />
+    <aura:attribute name="allFields" type="String[]" />
+    <aura:attribute name="fieldDefinitionList" type="Object[]" />
+    <aura:attribute name="dataTypeOperatorMap" type="Object" />
+    <aura:attribute name="allOperators" type="String[]" />
+    <aura:attribute name="selectedBoolVal" type='String'/>  
+    <aura:attribute name='newRule' type='Rule_Library__c' default="{'sobjectType': 'Rule_Library__c','Rule_Value__c':''}"/> 
+    <aura:attribute name="selectedType" type="String" />   
+    <aura:attribute name="ruleValue" type="String" />  
+    <aura:attribute name="multiValueCount" type="String" />  
+    <aura:attribute name="allPicklistValues" type="String[]" />
+    <aura:attribute name="selectedPicklistValues" type="String[]" />  
+    <aura:attribute name="filteredList" type="String[]" />  
+    <aura:attribute name="ruleId" type="String" />   
+    <aura:attribute name="CodeSearchLink" type="String" />     
+    <aura:attribute name="showautosuggestedlist" type="Boolean" />
+    <aura:attribute name="showRuleValue" type="Boolean" default="false" />
+    <aura:attribute name="isInvalidRule" type="Boolean" default="false" />
+    <aura:attribute name="showSelectedValues" type="Boolean" default="false" />
+    
+    <aura:registerEvent name="RuleActionEvent" type="c:RuleActions"/>
+    
+    <aura:attribute name="isShowGenericMessage" type="Boolean" default="false" /> 
+    <aura:attribute name="genericMessage" type="String" />   
+    <aura:attribute name="genericMessageAction" type="String" />   
+    <aura:attribute name="isConfirmation" type="boolean" /> 
+    <aura:attribute name="lookupType" type="String" /> 
+    
+    <aura:handler name='hideGenericMessage' event="c:HideGenericMessage" action="{!c.handleActionConfirmation}"/>  
+    
+    <div>
+        <div class="slds-grid">
+            <h2 class='header1'>
+                <aura:if isTrue="{!v.mode == 'Edit'}">
+                    Edit Rule
+                </aura:if>
+                <aura:if isTrue="{!v.mode == 'Clone'}">
+                    Clone Rule
+                </aura:if>
+                <aura:if isTrue="{! v.mode != 'Edit' &amp;&amp;  v.mode != 'Clone'}">
+                    Create New Rule
+                </aura:if>                
+            </h2>
+        </div>
+        <aura:if isTrue='{!v.isInvalidRule}'>
+            <div class='invalidrule-div'>
+                This is a invalid Rule.  
+            </div>            
+        </aura:if>
+        <div class="slds-form new-rule-form">
+            <table class="slds-table slds-m-top--small slds-table--fixed-layout">          
+                <tr>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+                            <div class="slds-form-element__control">    
+                                <label class="slds-form-element__label" for="select-01">Type</label>                                      					                      				
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <ui:inputSelect aura:id="selectType" change="{!c.handleTypeChange}" value='{!v.selectedType}' class='slds-select'>
+                                <ui:inputSelectOption text="Global" label="Global" value='true'/>
+                                <aura:iteration items='{!v.allTypes}' var='category'>
+                                    <ui:inputSelectOption text="{!category.value}" label="{!category.label}"/>
+                                </aura:iteration>
+                            </ui:inputSelect>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+                            <div class="slds-form-element__control">
+                                <label class="slds-form-element__label" for="select-01">Gender</label> 
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <div class="slds-form-element__control">                           						
+                                <ui:inputSelect aura:id="selectGender" class='slds-select' value='{!v.newRule.Rule_Gender__c}'>
+                                    <ui:inputSelectOption text="U" label="Unspecified"/>
+                                    <ui:inputSelectOption text="M" label="Male"/>
+                                    <ui:inputSelectOption text="F" label="Female"/>
+                                </ui:inputSelect>       					
+                            </div>
+                        </div>
+                    </td>            
+                    <td> 
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-2of2 slds-text-align--right">
+                            <div class="slds-form-element__control">
+                                <label class="slds-form-element__label" for="text-input-01">
+                                    <abbr class="slds-required" title="required">*</abbr> Symptom</label>
+                            </div>
+                        </div>
+                    </td>  
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-input-has-icon slds-input-has-icon--right">
+                            <tr>
+                                <td class="lookup-td">
+                                    <span class="slds-icon__container slds-icon-utility-search slds-input__icon AutoSuggestImagePosition" type="submit" onclick="{!c.arrowClicked}" >
+                                		<img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/down-arrow-black.gif')}"  alt='show' title='show' />
+                            		</span>
+                                    <ui:inputText aura:id="selectField"
+                                                  class="slds-input slds-truncate"
+                                                  labelClass="slds-form-element__label"
+                                                  updateOn="keyup"
+                                                  placeholder="Search Symptom"
+                                                  value="{!v.newRule.Rule_Field__c}"
+                                                  keyup="{!c.search}"
+                                                  required="true"/>
+                                    <aura:if isTrue="{!v.showautosuggestedlist}">
+                                        <div align="left" class="slds-size--2-of-2 slds-medium-size--6-of-6 slds-large-size--12-of-12 slds-lookup__list slds-lookup__menu slds-show" aura:id="picklistdiv_aura">
+                                            <c:AutoSuggestion AutoResults="{!v.filteredList}"/>
+                                        </div>
+                                    </aura:if>
+                                </td>
+                                <td class="lookup-td">
+                                    <aura:if isTrue="{!v.lookupType == 'CodeSearch'}">
+                                        <span class='with-pointer'>
+                                            <a onclick='{!c.openICDLookupForSymptom}' href="#">
+                                                <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/SearchIcon.png')}"/>
+                                            </a>
+                                        </span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.lookupType == 'Medication'}">
+                                        <span class='with-pointer'>
+                                            <a onclick='{!c.openMedicationLookupForSymptom}' href="#">
+                                                <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/SearchIcon.png')}"/>
+                                            </a>
+                                        </span>
+                                    </aura:if>
+                                </td>
+                            </tr> 
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <div class="slds-form-element__control slds-text-align--right">
+                                <label class="slds-form-element__label" for="text-input-01">
+                                    <abbr class="slds-required" title="required">*</abbr> Operator</label>              		
+                            </div> 
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1">
+                            <div class="slds-form-element__control">
+                                <ui:inputSelect aura:id="selectOperator" class='slds-select' change='{!c.handleOperatorChange}'>
+                                    <ui:inputSelectOption text="None" label="--None--"/>
+                                    <aura:iteration items="{!v.allOperators}" var="opOption">
+                                        <ui:inputSelectOption text="{!opOption}" label="{!opOption}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>               		
+                            </div> 
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required slds-hide" aura:id = 'textNumValue'>  		    	
+                            <td>
+                                <label class="slds-form-element__label" for="text-input-01">
+                                    <abbr class="slds-required" title="required">*</abbr> Value</label> 
+                            </td>
+                            <td>
+                                <div class="slds-form-element is-required width-10of10" > 
+                                    <ui:inputText aura:id="ruleTextValue" class="slds-input"  placeholder="Enter Value for Rule"  keyup='{!c.handleValueTextKeyUp}' updateOn="keyup" required=""/>
+                                </div>
+                            </td>                        
+                        </div>
+                        <div class="slds-form-element slds-hide" aura:id ='boolValue'>                    
+                            <div class="slds-form-element__control">
+                                <td>
+                                    <label class="slds-form-element__label" for="text-input-01">
+                                        <abbr class="slds-required" title="required">*</abbr> Value</label>
+                                </td>
+                                <td>
+                                    <div class="slds-select_container width-1of1">
+                                        <ui:inputSelect aura:id="allBoolVals" class='slds-select' value='{!v.selectedBoolVal}' change='{!c.handleBoolValueChange}'>
+                                            <ui:inputSelectOption text="True,Yes,1" label="Yes"/>
+                                            <ui:inputSelectOption text="False,No,0" label="No"/>
+                                        </ui:inputSelect>
+                                    </div> 
+                                </td>
+                            </div>
+                        </div>
+                        <td>
+                            <div aura:id= 'multipleValueCount-container' class='slds-hide'>
+                                <ui:inputNumber aura:id='multipleValueCount' class="slds-input slds-hide multicount" value='{!v.newRule.Multiple_Value_Count__c}' updateOn='keyup' label='How many values should be provided?' keyup='{!c.handleMultiCountKeyup}'/>
+                            </div>
+                        </td>
+                        <fieldset class="slds-form-element slds-hide" aura:id = 'picklistValues'>
+                            
+                            <td>
+                                <div class="slds-form-element__control" aura:id = 'picklistValuesDiv'>
+                                    <legend class="slds-form-element__legend slds-form-element__label">Select Values</legend>
+                                    <aura:iteration items="{!v.allPicklistValues}" var="option">  
+                                        <ui:inputCheckbox aura:id='picklistCheckbox' label='{!option}' text='{!option}'  change='{!c.onCheck}' labelClass='slds-form-element__label'/>
+                                    </aura:iteration>
+                                </div>
+                            </td>
+                            <td>
+                                <ui:outputText value="" aura:id='picklistValuesMsg'/>
+                            </td>
+                        </fieldset>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <div class="slds-form-element is-required width-1of1 padding-top-small slds-text-align--right" >
+                            <label class="slds-form-element__label" for="text-input-ICDText">
+                                ICD </label>    			
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-input-has-icon slds-input-has-icon--right">
+                            <span class="slds-icon__container slds-icon-utility-search slds-input__icon">
+                                <a onclick='{!c.openICDLookup}' href="#">
+                                    <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/SearchIcon.png')}"/>
+                                </a>
+                            </span>
+                            <ui:inputText aura:id='ICDText' class="slds-input" value='{!v.newRule.Rule_ICD__c}' placeholder="ICD of Diagnosis for Rule"  />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required width-2of2 padding-top-small slds-text-align--right" >
+                            <label class="slds-form-element__label" for="text-input-ICDDescText">
+                                ICD Description</label>    			
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-form-element is-required width-2of2 padding-top-small" >  		    	
+                            <ui:inputTextArea aura:id='ICDDescText' class="slds-input" value='{!v.newRule.Rule_Diagnosis__c}' placeholder="ICD Description" rows="3"/>
+                        </div>
+                    </td>   
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+                            <div class="slds-form-element__control">    
+                                <label class="slds-form-element__label" for="select-01">Activate Rule</label>                                      					                      				
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan='4'>
+                        <ui:inputCheckbox aura:id="ruleStatus" value="{!v.newRule.is_Active__c}"/>
+                    </td>
+                    
+                </tr>
+            </table>
+            
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            
+            <div class='display-rule'>
+                
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer" width="50%">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col" class="slds-cell-shrink"><div class="slds-truncate" title="Rule To Be Created">Rule To Be Created</div></th>
+                            <th scope="col" class="slds-cell-shrink"><div class="slds-truncate" title="Diagnosis ICD">Diagnosis ICD</div></th>
+                            <th scope="col" class="slds-cell-shrink"><div class="slds-truncate" title="Description">Description</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {!v.newRule.Rule_Field__c} &nbsp; {!v.newRule.Rule_Operator__c} &nbsp; 
+                                <aura:if isTrue="{!v.selectedPicklistValues.length == 0}">
+                                    {!v.newRule.Rule_Value__c}
+                                </aura:if>
+                                
+                                <!--<aura:if isTrue="{!v.newRule.Rule_Operator__c != ':' &amp;&amp; v.selectedPicklistValues.length > 0}">-->
+                                <div aura:id="pickListOptions" class='slds-hide'>
+                                    
+                                    <aura:iteration items='{!v.selectedPicklistValues}' var='option'> 
+                                        {!option},
+                                    </aura:iteration>
+                                </div>    
+                                <!--</aura:if>    -->
+                                
+                                <!--<aura:if isTrue="{!v.newRule.Rule_Operator__c == ':' &amp;&amp; v.selectedPicklistValues.length > 0}">-->
+                                <div aura:id="multiOptions">
+                                    {!v.newRule.Rule_Value__c}
+                                    <aura:iteration items='{!v.selectedPicklistValues}' var='option'> 
+                                        {!option};
+                                    </aura:iteration>
+                                    Any <b> {!v.newRule.Multiple_Value_Count__c} </b> of the selected Values. 
+                                </div>                    
+                                <!--</aura:if> -->
+                            </td>
+                            <td>{!v.newRule.Rule_ICD__c}</td>
+                            <td>{!v.newRule.Rule_Diagnosis__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class='button-div'>
+                <button class="slds-button slds-button--neutral" onclick = '{!c.saveRule}'> Save Rule </button>
+                <button class="slds-button slds-button--neutral" onclick = '{!c.cancel}'> Cancel</button>
+            </div> 
+        </div>
+    </div>
+    <aura:if isTrue='{!v.isShowGenericMessage}'>
+        <c:GenericMessage isShow='{!v.isShowGenericMessage}'  isConfirmation='{!v.isConfirmation}' action='{!v.genericMessageAction}' message='{!v.genericMessage}' positiveResponse="Save" negativeResponse="Cancel"/>
+    </aura:if>
+    
+</aura:component>

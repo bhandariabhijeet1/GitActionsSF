@@ -1,0 +1,73 @@
+<aura:component controller='RuleCategoryController'>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
+    <aura:attribute name='selectedType' type='String'/>
+    <aura:attribute name='selectedCategory' type='String'/>
+    <aura:attribute name='ruleCategory' type='String'/>
+    <aura:attribute name='ruleCategoryID' type='String'/>
+    <aura:attribute name='allCategories' type='String[]'/>
+    <aura:attribute name='mode' type='boolean'/>
+    
+    
+  <aura:attribute name="isShowGenericMessage" type="Boolean" default="false" /> 
+  <aura:attribute name="genericMessage" type="String" />   
+  <aura:attribute name="genericMessageAction" type="String" />   
+  <aura:attribute name="isConfirmation" type="boolean" />  
+
+  <aura:handler name='hideGenericMessage' event="c:HideGenericMessage" action="{!c.handleActionConfirmation}"/>  
+  
+    
+    <aura:registerEvent name="RuleCategoryActionEvent" type="c:RuleCategoryActions"/>  
+  	<div class="slds-grid">
+      <h1 class='header1'>
+        <aura:if isTrue="{!v.mode == 'edit'}">
+          	Edit Rule Category
+          </aura:if>
+          <aura:if isTrue="{! v.mode != 'edit'}">
+           Create New Rule Category
+          </aura:if>
+      </h1>
+  	</div>
+ 	<div class="slds-form new-rule-form">
+  	<table class="slds-table slds-m-top--small slds-table--fixed-layout">  
+    	<tr>
+            <td>
+                <div class="slds-form-element padding-top-small  slds-text-align--right">
+       				<div class="slds-form-element__control">    
+                        <label class="slds-form-element__label" for="select-01">Category</label>                                      					                      				
+       				</div>
+       			</div>
+            </td>
+            <td>
+                <div class="slds-form-element padding-top-small">
+                	<ui:inputSelect aura:id="selectCategory" change="{!c.handleTypeChange}" value='{!v.selectedCategory}' class='slds-select'>
+                       <ui:inputSelectOption text="" label="--None--"/>
+                        <aura:iteration items="{!v.allCategories}" var="opOption">
+                       		<ui:inputSelectOption text="{!opOption}" label="{!opOption}"/>
+                  		</aura:iteration>
+                      
+                    </ui:inputSelect>
+                </div>
+            </td>
+            <td>
+                <div class="slds-form-element padding-top-small  slds-text-align--right">
+  					<div class="slds-form-element__control">
+                        <label class="slds-form-element__label" for="select-01">Type</label> 
+  					</div>
+  				</div>
+            </td>
+            <td>
+                <div class="slds-form-element padding-top-small">
+                    <ui:inputText aura:id='selectTypeText' class="slds-input" value='{!v.selectedType}' keyup="{!c.handleTypeInput}"/>
+  				</div>
+            </td>    
+        </tr>
+     </table>
+    </div>    
+    <div class='button-container'>
+    	<button class="slds-button slds-button--neutral" onclick = '{!c.saveRule}'> Save Rule Category</button>
+        <button class="slds-button slds-button--neutral" onclick = '{!c.cancel}'> Cancel</button>
+    </div> 
+     <aura:if isTrue='{!v.isShowGenericMessage}'>
+       <c:GenericMessage isShow='{!v.isShowGenericMessage}'  isConfirmation='{!v.isConfirmation}' action='{!v.genericMessageAction}' message='{!v.genericMessage}' positiveResponse="Save" negativeResponse="Cancel"/>
+    </aura:if>
+</aura:component>

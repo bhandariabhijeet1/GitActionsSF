@@ -1,0 +1,104 @@
+.THIS {
+    padding : 1%;
+}
+.THIS .new-rule-form {
+	  /*  border : 1px solid #d8dde6;*/
+}
+.THIS .width-5of10 {
+    width: 50% !important;
+}
+.THIS .width-2of10 {
+    width: 20% !important;
+}
+.THIS .width-1of10 {
+    width: 10% !important;
+}
+.THIS .header1 {
+    font-weight: 100;
+    font-size: 1.5em;
+}
+.THIS .padding-top-small {
+        padding-top: 1%;
+}
+.THIS .button-div {
+    text-align: center;
+    padding-top: 5%;
+}
+.THIS .display-rule {
+    line-height : 140%;
+    background-color: #EFEFEE;
+     text-align: center;
+}
+.THIS .with-pointer {
+    cursor: pointer;
+}
+.THIS .td {
+    vertical-align: top;    	
+}
+.THIS {
+}
+.THIS .headingLeft {
+    float: left;
+   	font-size: 16px;
+	font-weight: bold;
+	position: relative;
+    
+}
+.THIS .btnRight {
+    float: right !important;
+}
+.THIS .rule-table {
+    border: 1px solid #B7B7B7 !important;    
+}
+.THIS .highLightRow {
+    background-color: rgb(255, 183, 93) !important;
+}
+.THIS #footer{
+   	height:25%;
+    overflow:auto;
+}
+.THIS .padding-top-very-small {
+        padding-top: 0.5%;
+}
+.THIS .errorMsg{
+   	color:red;    
+}
+.THIS .modal_header_background {
+     background: rgb(247, 249, 251) !important;
+     padding: 0.5rem;
+   
+}
+.THIS modal-custom {
+    overflow: scroll;
+}
+.THIS .table-header-row {
+ background-color: #C4BC96 !important;
+}
+.THIS .container-custom {
+    padding-bottom: 10px;
+}
+.THIS .ReducePadding th{
+    padding: .15rem;
+}
+
+.THIS .ReducePadding td{
+    padding: .15rem;
+}
+.THIS .smallInput{
+    line-height: 1.25rem;
+    min-height: 1.25rem;
+}
+.THIS .highLightRowSwap {
+    background-color: #ff8080 !important;
+}
+.THIS .iconTopPadding {
+    top: 1.2rem !important;
+}
+.THIS .ruleListContainer {
+   padding-left: 1%;
+   padding-right: 1%; 
+   padding-top: 1%; 
+}
+.THIS .fullWidth {
+    width: 90% !important;
+}

@@ -1,0 +1,3 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+	Hello Lightning 1
+</aura:component>

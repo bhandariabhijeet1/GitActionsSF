@@ -1,0 +1,40 @@
+<aura:component >
+	
+    <aura:attribute name="newItem" type="Camping_Item__c" default="{'sobjectType':'Camping_Item__c','Quantity__c':0,'Price__c':0,'Name':'Test CAmping','Packed__c':false}"/> 
+    <aura:registerEvent name="addItem" type="c:addItemEvent"/>
+    
+    <!-- BOXED AREA -->
+    <fieldset class="slds-box slds-theme--default slds-container--small">
+        
+        <legend id="newcampingItemform" class="slds-text-heading--small 
+                                               slds-p-vertical--medium">
+            Add Camping List Item
+        </legend>
+        
+        <!-- CREATE NEW EXPENSE FORM -->
+        <form class="slds-form--stacked">          
+            <lightning:input aura:id="campingItemForm" label="Camping Item Name"
+                             name="campingItemname"
+                             value="{!v.newItem.Name}"/> 
+            <lightning:input type="number" aura:id="campingItemForm" label="Price"
+                             name="campingItemPrice"
+                             formatter="currency"
+                             value="{!v.newItem.Price__c}"/>
+            <lightning:input aura:id="campingItemForm" label="Quantity"
+                             name="campingItemQuantity"
+                             min="1" 
+                             messageWhenRangeUnderflow="Please enter quantity greater than 1" 
+                             value="{!v.newItem.Quantity__c}"/>
+            <lightning:input type="checkbox" aura:id="campingItemForm" label="Packed?"  
+                             name="campingItemPacked"
+                             checked="{!v.newItem.Packed__c}"/>
+            <lightning:button label="Create Camping Item" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.clickCreateItem}"/>
+        </form>
+        <!-- / CREATE NEW EXPENSE FORM -->
+        
+    </fieldset>
+    <!-- / BOXED AREA -->
+</aura:component>

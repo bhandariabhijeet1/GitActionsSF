@@ -1,0 +1,151 @@
+.THIS {
+    
+}
+
+.THIS .with-pointer {
+    cursor: pointer;
+}
+.THIS .custom-show {
+    display: inline;
+}
+.THIS .rule-table {
+    border: 1px solid #B7B7B7 !important;
+    
+}
+.THIS .table-container {
+	padding-top: 1% !important;
+}
+
+.THIS .actions-container {
+     border: 1px solid #d8dde6;
+}
+.THIS .inactive-rule {
+     color: grey;
+}
+.THIS .action-col {
+     width: 10%;
+     padding-bottom: 0.5rem;
+}
+.THIS .name-col {
+     width: 40%;
+}
+.THIS .ID-col {
+     width: 55%;
+}
+.THIS .desc-col {
+      width: 90%;
+}
+.THIS .search-box {
+       width: 25%; 
+}
+.THIS .action-col-overlay {
+    padding-bottom: 0.5rem !important;
+}
+.THIS .select-col-overlay {
+    padding-left: 0.15rem !important;
+}
+.THIS .name-col-overlay {
+     width: 40%;
+}
+.THIS .desc-col-overlay {
+      width: 100%;
+}
+.THIS .font-weight-bold {
+    font-weight: 700;
+}
+.THIS .table-header-row {
+   line-height: 16px;
+   background-color: #EFEFEE;
+}
+.THIS .my-table--striped tr:nth-child(even) {
+      background-color: #EFEFEE;
+}
+.THIS .filter-box {
+     width: 22%;
+ }
+.THIS .ReducePadding{padding: .15rem;}
+.THIS .ReducePadding th{
+    padding: .15rem;
+}
+
+.THIS .ReducePadding td{
+    padding: .15rem;
+}
+.THIS .btnAND {
+    /*width: 60px;*/
+    text-align:center;
+    color: white;
+    font-weight: bold;
+    height: 27px;
+    -webkit-appearance: none;
+    }
+
+.THIS .btnOR{
+    /*width: 50px;*/
+    text-align:center;
+    color: royalblue;
+    font-weight: bold;
+    height: 27px;
+    -webkit-appearance: none;
+}
+.THIS .btnANYOF{
+    /*width: 80px;*/
+    text-align:center;
+    color: darkorange;
+    font-weight: bold;
+    border: 1px solid darkorange !important;    
+    height: 27px;
+    -webkit-appearance: none;
+    cursor: pointer !important;
+}
+.THIS .genericmessage {
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+.THIS .btnClicked {    
+    font-weight: bold;
+    background-color: lightgreen;
+}
+.THIS .table-row-height {
+    line-height: 10px !important;
+}
+
+.THIS .btnAND:focus {    
+    background-color: lightgreen;
+}
+
+.THIS .btnAND:active {    
+    background-color: lightgreen;
+}
+
+.THIS .btnOR:focus {    
+    background-color: lightgreen;
+}
+
+.THIS .slds-button--neutral[disabled] {
+    background: rgb(224, 229, 238) !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.THIS .btnOR:active {    
+    background-color: lightgreen;
+}
+
+.THIS .btnANYOF:visited {    
+    background-color: lightgreen;
+}
+
+.THIS .btnANYOF:focus {    
+    background-color: lightgreen;
+}
+
+.THIS .btnANYOF:active {    
+    background-color: lightgreen;
+}
+
+.THIS .comb-table-header-row {
+   line-height: 16px;
+  background-color: #C4BC96 !important;
+}

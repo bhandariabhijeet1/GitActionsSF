@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CombinationBuilder_Cloned</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_Cloned</shortDescription>
+        <value>Combination Cloned</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_Close</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_Close</shortDescription>
+        <value>Are you sure you want to Exit and cancel the creation of  the Rule Combination, any changes will not be saved?</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombSaveActiveConfirmation</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombSaveActiveConfirmation</shortDescription>
+        <value>Selecting save would create an Active Rule Combination.</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombSaveConfirmation</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombSaveConfirmation</shortDescription>
+        <value>Selecting save would create an Inactive Rule Combination.</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombSaveDuplicate</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombSaveDuplicate</shortDescription>
+        <value>This Rule Combination already exists.</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombSaveError</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombSaveError</shortDescription>
+        <value>Error in saving Rule Combination</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombSaveInactiveRules</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombSaveInactiveRules</shortDescription>
+        <value>The rule combination you are trying to activate includes an inactive rule(s): #RULE#. This rule combination will not trigger an ICD diagnosis unless all rules within  the rule combination are active.</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_CombTooLong</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_CombTooLong</shortDescription>
+        <value>This Combination is too long.</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_Edited</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_Edited</shortDescription>
+        <value>Combination Edited</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_Status_Activated</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_Status_Activated</shortDescription>
+        <value>Rule Combination Activated</value>
+    </labels>
+    <labels>
+        <fullName>CombinationBuilder_Status_Deactivated</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CombinationBuilder_Status_Deactivated</shortDescription>
+        <value>Rule Combination Deactivated</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_Cloned</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_Cloned</shortDescription>
+        <value>Rule Cloned</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_Edited</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_Edited</shortDescription>
+        <value>Rule Edited</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_RuleSaveActiveConfirmation</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder-RuleSaveActiveConfirmation</shortDescription>
+        <value>Selecting save would create an Active Rule.</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_RuleSaveConfirmation</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder-RuleSaveInactiveConfirmation</shortDescription>
+        <value>Selecting save would create an Inactive Rule.</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_RuleSaveDuplicate</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder-RuleSaveDuplicate</shortDescription>
+        <value>This Rule already exists.</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_RuleSaveError</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_RuleSaveError</shortDescription>
+        <value>Error in saving rule.</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_RuleStatusUpdate</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder-RuleStatusUpdate</shortDescription>
+        <value>Are you sure you want to $status$ this rule?</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_Status_Activated</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_Status_Activated</shortDescription>
+        <value>Rule Activated</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_Status_Deactivated</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_Status_Deactivated</shortDescription>
+        <value>Rule Deactivated</value>
+    </labels>
+    <labels>
+        <fullName>RuleBuilder_Status_Error</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleBuilder_Status_Error</shortDescription>
+        <value>Status Error</value>
+    </labels>
+    <labels>
+        <fullName>RuleCategoryBuilder_CategorySaveDuplicate</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleCategoryBuilder_CategorySaveDuplicate</shortDescription>
+        <value>This rule category already exists</value>
+    </labels>
+    <labels>
+        <fullName>RuleCategoryBuilder_SaveConfirmation</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RuleCategoryBuilder_SaveConfirmation</shortDescription>
+        <value>Do you want to save this rule Category?</value>
+    </labels>
+    <labels>
+        <fullName>Rule_Builder</fullName>
+        <categories>SmartLogic</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rule Builder</shortDescription>
+        <value>Smart Logic Rule Builder</value>
+    </labels>
+</CustomLabels>

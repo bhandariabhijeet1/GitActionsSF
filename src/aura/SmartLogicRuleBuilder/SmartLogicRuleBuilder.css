@@ -1,0 +1,35 @@
+.THIS {
+}
+.THIS .app-header {
+    background-color: white;
+    color: orange;
+    padding-bottom: 1%;
+ }
+
+.THIS .custom-tab-item {
+    
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS .custom-tab-single-item {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+.THIS .tab-container {
+   padding: 1%;    
+}
+.THIS .tab-content-section {
+    border: 1px solid #d8dde6;
+}
+.THIS .ruleListContainer {
+   padding-left: 1%;
+   padding-right: 1%; 
+}
+.THIS .newRuleButtonContainer {
+   padding: 2%;
+}
+.THIS .UserNavigatoionLinks{
+   padding-left: 10px; 
+}

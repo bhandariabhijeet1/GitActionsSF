@@ -1,0 +1,46 @@
+<aura:component >
+    <aura:attribute name="severity" type="String"/>
+    <aura:attribute name="MessageString" type="String"/>
+    <aura:attribute name="ShowInfo" type="Boolean" default="true"/>
+    <aura:attribute name="Showerror" type="Boolean" default="true"/>
+    <aura:attribute name="Showwarning" type="Boolean" default="true"/>
+    <aura:attribute name="MessageShowFlag" type="Boolean"/>
+    <aura:if isTrue="{!v.severity=='error'}">
+        <aura:if isTrue="{!v.Showerror}">
+            
+            <div class="slds-notify slds-notify--toast slds-theme--error cust-toast" role="alert" style="min-width:auto;padding:0.45rem 1.0rem; margin:0;" >
+                <span class="slds-assistive-text">Error</span>
+                <div class="notify__content" style="float:left;">
+                    <h2 class="slds-text-heading--small" data-aura-rendered-by="18652:c"><c:SVGNew xlinkHref="/resource/SLDS202/assets/icons/utility-sprite/svg/symbols.svg#warning" class="slds-button__icon slds-icon--small slds-button__icon--left " ariahidden="true" svgColor="#ffffff"/>
+                        {!v.MessageString}</h2>
+                </div>
+            </div>
+            
+        </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.severity=='warning'}">
+        <aura:if isTrue="{!v.Showwarning}"> 
+            <div class="slds-show--inline-block slds-notify--toast slds-theme--warning slds-m-left--xxx-small" style="min-width : auto!important;padding:0.45rem 1.0rem; margin:0;" role="alert" >
+                <span class="slds-assistive-text">Info</span>
+                <div class="notify__content slds-grid">
+                    <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/warning.png')}" class='right-padding'/>               
+                    <div class="slds-col slds-align-middle">
+                        <h2 class="slds-text-heading--small" data-aura-rendered-by="18652:c">{!v.MessageString}</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </aura:if> 
+    <aura:if isTrue="{!v.severity=='info'}">
+        <aura:if isTrue="{!v.ShowInfo}">
+            <div class="slds-show--inline-block slds-notify--toast slds-theme--info slds-m-left--xxx-small" role="alert" style="min-width : auto!important;padding:0.45rem 1.0rem; margin:0;">
+                <div class="notify__content slds-grid" >
+                    <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/info.png')}" height="20" width="30" class='right-padding'/> 
+                    <div class="slds-col slds-align-middle">
+                        <h2 class="slds-text-heading--small" data-aura-rendered-by="18652:c">{!v.MessageString}</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </aura:if>
+</aura:component>

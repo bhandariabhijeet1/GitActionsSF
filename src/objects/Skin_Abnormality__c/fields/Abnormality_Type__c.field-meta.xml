@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Abnormality_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Abnormality Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Atypical Lesion</fullName>
+                <default>false</default>
+                <label>Atypical Lesion</label>
+            </value>
+            <value>
+                <fullName>Non-Pressure Ulcer</fullName>
+                <default>false</default>
+                <label>Non-Pressure Ulcer</label>
+            </value>
+            <value>
+                <fullName>Pressure Ulcer</fullName>
+                <default>false</default>
+                <label>Pressure Ulcer</label>
+            </value>
+            <value>
+                <fullName>Rash</fullName>
+                <default>false</default>
+                <label>Rash</label>
+            </value>
+            <value>
+                <fullName>Skin Tear</fullName>
+                <default>false</default>
+                <label>Skin Tear</label>
+            </value>
+            <value>
+                <fullName>Laceration</fullName>
+                <default>false</default>
+                <label>Laceration</label>
+            </value>
+            <value>
+                <fullName>Abrasion</fullName>
+                <default>false</default>
+                <label>Abrasion</label>
+            </value>
+            <value>
+                <fullName>Surgical Wound</fullName>
+                <default>false</default>
+                <label>Surgical Wound</label>
+            </value>
+            <value>
+                <fullName>Deep Tissue Injury (DTI)</fullName>
+                <default>false</default>
+                <label>Deep Tissue Injury (DTI)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

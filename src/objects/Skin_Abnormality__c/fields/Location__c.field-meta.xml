@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location__c</fullName>
+    <externalId>false</externalId>
+    <label>Location</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Abnormality_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Thigh</fullName>
+                <default>false</default>
+                <label>Thigh</label>
+            </value>
+            <value>
+                <fullName>Lower Leg</fullName>
+                <default>false</default>
+                <label>Lower Leg</label>
+            </value>
+            <value>
+                <fullName>Ankle</fullName>
+                <default>false</default>
+                <label>Ankle</label>
+            </value>
+            <value>
+                <fullName>Midfoot/Heel</fullName>
+                <default>false</default>
+                <label>Midfoot/Heel</label>
+            </value>
+            <value>
+                <fullName>Foot</fullName>
+                <default>false</default>
+                <label>Foot</label>
+            </value>
+            <value>
+                <fullName>Head</fullName>
+                <default>false</default>
+                <label>Head</label>
+            </value>
+            <value>
+                <fullName>Elbow</fullName>
+                <default>false</default>
+                <label>Elbow</label>
+            </value>
+            <value>
+                <fullName>Upper Back</fullName>
+                <default>false</default>
+                <label>Upper Back</label>
+            </value>
+            <value>
+                <fullName>Lower Back</fullName>
+                <default>false</default>
+                <label>Lower Back</label>
+            </value>
+            <value>
+                <fullName>Sacral</fullName>
+                <default>false</default>
+                <label>Sacral</label>
+            </value>
+            <value>
+                <fullName>Hip</fullName>
+                <default>false</default>
+                <label>Hip</label>
+            </value>
+            <value>
+                <fullName>Buttock</fullName>
+                <default>false</default>
+                <label>Buttock</label>
+            </value>
+            <value>
+                <fullName>Heel</fullName>
+                <default>false</default>
+                <label>Heel</label>
+            </value>
+            <value>
+                <fullName>Contigous Back</fullName>
+                <default>false</default>
+                <label>Contigous Back</label>
+            </value>
+            <value>
+                <fullName>Buttock and Hip</fullName>
+                <default>false</default>
+                <label>Buttock and Hip</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Thigh</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Lower Leg</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Ankle</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Midfoot/Heel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Foot</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Head</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Elbow</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Upper Back</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Lower Back</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Sacral</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Hip</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Buttock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Heel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Contigous Back</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Buttock and Hip</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

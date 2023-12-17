@@ -1,0 +1,32 @@
+<aura:component controller="RuleBuilderController" >
+	<aura:attribute name='allActions' type='Object[]' />
+    <aura:attribute name='rule' type='Object' />
+    <aura:attribute name='isRule' type='boolean' default="true" />
+    <aura:attribute name='selectedAction' type='String'/>
+    <aura:registerEvent name="RuleListEvents" type="c:RuleListEvents"/>
+    <aura:registerEvent name="RuleActionEvent" type="c:RuleActions"/>
+    <aura:attribute name='combinationBuilderPage' type='boolean' default="false" />
+   
+    <aura:if isTrue='{!!v.combinationBuilderPage}'>
+        <ui:inputSelect aura:id="selectType" change="{!c.handleAction}" value='{!v.selectedAction}' class='slds-select'>
+           <ui:inputSelectOption text="" label="Actions"/> 	
+           <ui:inputSelectOption text="Activate" label="{! (v.isRule ? ((v.rule.is_Active__c)? 'Deactivate':'Activate') : ((v.rule.Is_Active__c)? 'Deactivate':'Activate'))}"/>
+           <ui:inputSelectOption text="Edit" label="Edit"/> 		
+           <ui:inputSelectOption text="Clone" label="Clone"/>
+           <ui:inputSelectOption text="Test" label="Test"/>
+        </ui:inputSelect>
+    </aura:if>
+    <aura:if isTrue='{!v.combinationBuilderPage}'>      
+        <div>
+        	<!--<aura:if isTrue='{!v.isRule}'>-->
+            	<aura:if isTrue='{! (v.isRule ? v.rule.is_Active__c : v.rule.Is_Active__c)}'>
+                	<a class="slds-button--small slds-button--neutral deactive" onclick='{!c.handleAction}'>Deactivate</a>                
+            	</aura:if>
+            	<aura:if isTrue='{! !(v.isRule ? v.rule.is_Active__c : v.rule.Is_Active__c)}'>
+                	<a class="slds-button--small slds-button--brand active" onclick='{!c.handleAction}'>Activate</a>                
+            	</aura:if>
+        	<!--</aura:if>-->
+       </div>
+    </aura:if>    
+    
+</aura:component>

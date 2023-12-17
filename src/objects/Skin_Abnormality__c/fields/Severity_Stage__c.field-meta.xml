@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Severity_Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Severity/Stage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Abnormality_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Breakdown of Skin</fullName>
+                <default>false</default>
+                <label>Breakdown of Skin</label>
+            </value>
+            <value>
+                <fullName>Fat Layer Exposed</fullName>
+                <default>false</default>
+                <label>Fat Layer Exposed</label>
+            </value>
+            <value>
+                <fullName>Muscle Necrosis</fullName>
+                <default>false</default>
+                <label>Muscle Necrosis</label>
+            </value>
+            <value>
+                <fullName>Bone Necrosis</fullName>
+                <default>false</default>
+                <label>Bone Necrosis</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+            <value>
+                <fullName>Stage I</fullName>
+                <default>false</default>
+                <label>Stage I</label>
+            </value>
+            <value>
+                <fullName>Stage II</fullName>
+                <default>false</default>
+                <label>Stage II</label>
+            </value>
+            <value>
+                <fullName>Stage III</fullName>
+                <default>false</default>
+                <label>Stage III</label>
+            </value>
+            <value>
+                <fullName>Stage IV</fullName>
+                <default>false</default>
+                <label>Stage IV</label>
+            </value>
+            <value>
+                <fullName>Un-Stagable</fullName>
+                <default>false</default>
+                <label>Un-Stagable</label>
+            </value>
+            <value>
+                <fullName>Deep Tissue Injury</fullName>
+                <default>false</default>
+                <label>Deep Tissue Injury</label>
+            </value>
+            <value>
+                <fullName>Un-Stageable</fullName>
+                <default>false</default>
+                <label>Un-Stageable</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Breakdown of Skin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Fat Layer Exposed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Muscle Necrosis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Bone Necrosis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <valueName>Unspecified</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Stage I</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Stage II</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Stage III</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Stage IV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Deep Tissue Injury (DTI)</controllingFieldValue>
+            <valueName>Un-Stageable</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

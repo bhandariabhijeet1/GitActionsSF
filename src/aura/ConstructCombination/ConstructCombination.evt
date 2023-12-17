@@ -1,0 +1,10 @@
+<aura:event type="COMPONENT" access="public" description="Event template">
+    <aura:attribute name="ICombinationString" type="String"/>
+    <aura:attribute name="ICombinationMap" type="Object"/>
+    <aura:attribute name="ICombinationANYMap" type="Object"/>
+    <aura:attribute name="IOverlayRules" type="Object[]"/>
+    <aura:attribute name="IShowANYOFTable" type="Boolean"/>
+    <aura:attribute name="IShowRuleListTable" type="Boolean"/>
+	<aura:attribute name="ICurrentSessionSelectedRules" type="Object[]"/>
+    <aura:attribute name="IShowRuleCombListTable" type="Boolean"/>
+</aura:event>

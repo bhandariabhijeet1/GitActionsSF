@@ -1,0 +1,43 @@
+<aura:component controller='RuleCategoryController' >
+
+  <aura:attribute name="categoryList" type="Object[]" />
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  <aura:registerEvent name="RuleCategoryActionEvent" type="c:RuleCategoryActions"/>  
+  
+<div aura:id='listView'>
+  
+  <table aura:id='catListTable' class="slds-table slds-table--bordered slds-table--cell-buffer my-table--striped rule-table">
+  <thead>
+    <tr class="slds-text-title--caps table-header-row"> 
+      <th scope="col">
+        <div class="slds-truncate font-weight-bold" title="Rule Type">Rule Type</div>
+      </th>
+      <th scope="col">
+        <div class="slds-truncate font-weight-bold" title="Category">Category </div>
+      </th>
+      
+     </tr>
+  </thead>
+  <tbody>
+      
+      <aura:iteration items='{!v.categoryList}' var='cat'>
+      	<tr>   
+            
+            <th scope="row" data-label="Category Type" class='slds-cell-wrap name-col'>
+               <div>
+                   <a class='slds-cell-wrap' onclick="{!c.viewCategory}" data-catid='{!cat.Id}' data-category='{!cat.Rule_Category__c}' data-catType='{!cat.Rule_Type__c}'> 
+                      {!cat.Rule_Type__c}
+                   </a>
+               </div>
+       		</th>
+      		<td data-label="Category">
+        		<div class="slds-truncate" title="ICD">{!cat.Rule_Category__c}</div>
+      		</td>
+           
+    	</tr>
+      </aura:iteration>
+    
+  </tbody>
+ </table>
+</div>
+</aura:component>

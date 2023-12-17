@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Code Search URL</label>
+    <protected>false</protected>
+    <values>
+        <field>value__c</field>
+        <value xsi:type="xsd:string">/apex/CTSearch_Lookup?Type=#1&amp;ElementIds=#2&amp;DataColumns=#3&amp;DisplayColumns=&amp;FilterFields=&amp;FilterValues=&amp;isStandalone=#4&amp;SFIDField=#5&amp;DateOfService=#6&amp;isRuleBuilderSelection=#7&amp;searchFilterText=#8&amp;lightningURL=#9</value>
+    </values>
+</CustomMetadata>

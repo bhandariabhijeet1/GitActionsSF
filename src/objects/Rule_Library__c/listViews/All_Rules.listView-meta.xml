@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Rules</fullName>
+    <columns>NAME</columns>
+    <columns>Rule_Library_Ext_Id__c</columns>
+    <columns>Rule_Gender__c</columns>
+    <columns>Rule_Field__c</columns>
+    <columns>Rule_Operator__c</columns>
+    <columns>Rule_Value__c</columns>
+    <columns>Rule_ICD__c</columns>
+    <columns>Rule_Diagnosis__c</columns>
+    <columns>is_Active__c</columns>
+    <columns>Works_with_Rule_Combinations_Only__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Rules</label>
+</ListView>

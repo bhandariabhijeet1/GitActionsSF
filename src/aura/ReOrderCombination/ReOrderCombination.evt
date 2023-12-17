@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" access="public" description="Event template">
+    <aura:attribute name="IReOrderCombinationMap" type="Object"/>
+    <aura:attribute name="IReOrderOverlayRules" type="Object[]"/>
+	<aura:attribute name="IShowANYOFTable" type="Boolean"/>
+</aura:event>

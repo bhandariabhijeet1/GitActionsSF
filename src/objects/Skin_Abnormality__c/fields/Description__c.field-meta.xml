@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description__c</fullName>
+    <externalId>false</externalId>
+    <label>Description</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Abnormality_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Asymmetry</fullName>
+                <default>false</default>
+                <label>Asymmetry</label>
+            </value>
+            <value>
+                <fullName>Bleeding</fullName>
+                <default>false</default>
+                <label>Bleeding</label>
+            </value>
+            <value>
+                <fullName>Border Irregularity</fullName>
+                <default>false</default>
+                <label>Border Irregularity</label>
+            </value>
+            <value>
+                <fullName>Bulla</fullName>
+                <default>false</default>
+                <label>Bulla</label>
+            </value>
+            <value>
+                <fullName>Clear Drainage</fullName>
+                <default>false</default>
+                <label>Clear Drainage</label>
+            </value>
+            <value>
+                <fullName>Color Variegation &gt;1/3 Inch</fullName>
+                <default>false</default>
+                <label>Color Variegation &gt;1/3 Inch</label>
+            </value>
+            <value>
+                <fullName>Dressing Present</fullName>
+                <default>false</default>
+                <label>Dressing Present</label>
+            </value>
+            <value>
+                <fullName>Dry and Intact</fullName>
+                <default>false</default>
+                <label>Dry and Intact</label>
+            </value>
+            <value>
+                <fullName>Erythematous</fullName>
+                <default>false</default>
+                <label>Erythematous</label>
+            </value>
+            <value>
+                <fullName>Eschar</fullName>
+                <default>false</default>
+                <label>Eschar</label>
+            </value>
+            <value>
+                <fullName>Granulated</fullName>
+                <default>false</default>
+                <label>Granulated</label>
+            </value>
+            <value>
+                <fullName>Indurated</fullName>
+                <default>false</default>
+                <label>Indurated</label>
+            </value>
+            <value>
+                <fullName>Necrotic</fullName>
+                <default>false</default>
+                <label>Necrotic</label>
+            </value>
+            <value>
+                <fullName>Plaque</fullName>
+                <default>false</default>
+                <label>Plaque</label>
+            </value>
+            <value>
+                <fullName>Purulent Drainage</fullName>
+                <default>false</default>
+                <label>Purulent Drainage</label>
+            </value>
+            <value>
+                <fullName>Pustule</fullName>
+                <default>false</default>
+                <label>Pustule</label>
+            </value>
+            <value>
+                <fullName>Vesicular</fullName>
+                <default>false</default>
+                <label>Vesicular</label>
+            </value>
+            <value>
+                <fullName>Wheal</fullName>
+                <default>false</default>
+                <label>Wheal</label>
+            </value>
+            <value>
+                <fullName>Evidence of resurfaced full-thickness pressure ulcer</fullName>
+                <default>false</default>
+                <label>Evidence of resurfaced full-thickness pressure ulcer</label>
+            </value>
+            <value>
+                <fullName>Evidence of resurfaced pressure ulcer of undetermined thickness</fullName>
+                <default>false</default>
+                <label>Evidence of resurfaced pressure ulcer of undetermined thickness</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <valueName>Asymmetry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <valueName>Border Irregularity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <valueName>Color Variegation &gt;1/3 Inch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Dressing Present</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Atypical Lesion</controllingFieldValue>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Dry and Intact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Clear Drainage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Erythematous</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Eschar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Granulated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Indurated</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Necrotic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Purulent Drainage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Evidence of resurfaced full-thickness pressure ulcer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pressure Ulcer</controllingFieldValue>
+            <valueName>Evidence of resurfaced pressure ulcer of undetermined thickness</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <valueName>Bulla</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <valueName>Plaque</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <valueName>Pustule</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <valueName>Vesicular</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rash</controllingFieldValue>
+            <valueName>Wheal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Skin Tear</controllingFieldValue>
+            <controllingFieldValue>Laceration</controllingFieldValue>
+            <controllingFieldValue>Abrasion</controllingFieldValue>
+            <controllingFieldValue>Surgical Wound</controllingFieldValue>
+            <valueName>Bleeding</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,269 @@
+<aura:component access="global" implements="forceCommunity:availableForAllPageTypes" controller='smartLogicRuleTesterController'>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="allGenders" type="String[]" />  
+    <aura:attribute name="allCategories" type="String[]" />  
+    <aura:attribute name="RuleTypeSelected" type="String" />  
+    <aura:attribute name="FieldSelected" type="String" />  
+    <aura:attribute name="filteredList" type="String[]" />  
+    <aura:attribute name="fieldDefList" type="Object[]" />  
+    <aura:attribute name="allSymptomsList" type="Object[]" /> 
+    <aura:attribute name="allTestSymptomsList" type="Object[]" /> 
+    <aura:attribute name="showautosuggestedlist" type="Boolean" />   
+    <aura:attribute name="isShowResults" type="Boolean" />   
+    <aura:attribute name="isFieldMultiPicklist" type="Boolean" />   
+    <aura:attribute name="isFieldPicklist" type="Boolean" />   
+    <aura:attribute name="isFieldBoolean" type="Boolean" />   
+    <aura:attribute name="isFieldString" type="Boolean" />   
+    <aura:attribute name="isRule" type="Boolean" />   
+    <aura:attribute name="allFields" type="String[]" />
+    <aura:attribute name="smartResponse" type="Object" />
+    <aura:attribute name="ruleId" type="String"/>
+    <aura:attribute name="ruleLookupType" type="String"/>
+
+    <aura:handler name="AutosuggestionEvent" event="c:AutoSuggestionEvent" action="{!c.handleAutosuggestionEvent}" />
+    
+    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+        <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--2-of-6 slds-large-size--5-of-12">
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--left">                             
+                <div class="row sectionHeader">
+                    Rule Type
+                </div>
+                <div class="row">
+                    <div class="slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click slds-is-open">                
+                        <ui:inputSelect aura:id="MultipleRuleTypeSelection" multiple="true" class="slds-picklist slds-input MultiSelectPickList slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click" value="{!v.RuleTypeSelected}" change="{!c.ruleTypeSelectionChange}">
+                        <ui:inputSelectOption text="Global" label="Global" value='true'/>
+                            <aura:iteration items='{!v.allCategories}' var='category'>
+                            	<ui:inputSelectOption text="{!category.value}" label="{!category.label}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>               
+                </div>
+            </div>
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--left">
+                <div class="row sectionHeader">
+                    Symptoms
+                </div>
+                <span>
+                <aura:iteration items='{!v.allSymptomsList}' var='symptom' indexVar="index">
+                    <span>
+                    <div class="slds-grid slds-theme--shade">                      
+                        <div class="slds-size--1-of-2 slds-box slds-box--small slds-theme--shade slds-text-align--center slds-input-has-icon slds-input-has-icon--right">
+                           <span class="slds-icon__container slds-icon-utility-search slds-input__icon AutoSuggestImagePosition" type="submit" onclick="{!c.arrowClicked}" >
+                       			<img data-listindex= '{!index}' src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/down-arrow-black.gif')}"  alt='Symptom List' title='Symptom List' />
+                    		</span>
+                               <ui:inputText aura:id="selectField"
+                                              class="slds-input slds-truncate"
+                                              labelClass="slds-form-element__label"
+                                              updateOn="keyup"
+                                              placeholder="Search Symptom"
+                                              value='{!symptom.fieldName}'                                          
+                                              keyup="{!c.search}"
+                                        />
+                                <aura:if isTrue="{!symptom.showSuggestion}">
+                                   
+                                    <div align="left" class="slds-size--1-of-2 slds-medium-size--1-of-6 slds-large-size--12-of-12 slds-lookup__list slds-lookup__menu slds-show" aura:id="picklistdiv_aura">
+                                        <c:AutoSuggestion AutoResults="{!v.filteredList}" listIndex='{!index}'/> 
+                                        
+                                    </div>
+                                </aura:if>
+                         </div>
+                         <div class="slds-size--1-of-2 slds-box slds-box--small slds-theme--shade">
+                            <span>
+                             	<aura:if isTrue="{!symptom.fieldDataType == 'MULTIPICKLIST' }">
+                                    <span>
+                                    <ui:inputSelect aura:id="MULTIPICKLIST" multiple="true" class="MultiSelectPickList slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click slds-input" value="{!symptom.fieldValue}">
+                      			      <ui:inputSelectOption text="" label="--None--"/>
+                                      <aura:iteration items='{!symptom.lstfieldValue}' var='option'>
+                            			<ui:inputSelectOption text="{!option}" label="{!option}"/>
+                            		  </aura:iteration>
+                        			</ui:inputSelect>
+                                    </span>
+                                </aura:if>
+                             </span>
+                             <span>
+                                <aura:if isTrue="{!symptom.fieldDataType == 'PICKLIST' }">
+                                    <span>
+                                    <ui:inputSelect class='slds-select slds-input' value='{!symptom.fieldValue}'>
+                                        <ui:inputSelectOption text="" label="--None--"/>
+                                        <aura:iteration items="{!symptom.lstfieldValue}" var="option">
+                                            <ui:inputSelectOption text="{!option}" label="{!option}"/>
+                                        </aura:iteration>
+                                    </ui:inputSelect>  
+                                    </span>
+                                </aura:if>
+                             </span>
+                             <span>    
+                                <aura:if isTrue="{! symptom.fieldDataType == 'BOOLEAN' }">
+                                    <span>
+                                    <ui:inputSelect aura:id="allBoolVals" class='slds-select slds-input' value='{!symptom.fieldValue}'>
+                                        <ui:inputSelectOption text="" label="--None--"/>
+                                        <ui:inputSelectOption text="True,Yes,1" label="Yes"/>
+                                        <ui:inputSelectOption text="False,No,0" label="No"/>
+                                    </ui:inputSelect>
+                                    </span>
+                                </aura:if>
+                             </span>
+                             <span>
+                                <aura:if isTrue="{! symptom.fieldDataType != 'BOOLEAN' &amp;&amp; symptom.fieldDataType != 'PICKLIST'  &amp;&amp; symptom.fieldDataType != 'MULTIPICKLIST'   }">
+                                    <span>
+                                    <ui:inputText value='{!symptom.fieldValue}' class='slds-input slds-truncate' placeholder='Enter symptom value'/>
+                                    </span>
+                                </aura:if>
+                             </span>
+                            </div>
+                      
+                        <div class="slds-size--2-of-12 slds-grid--vertical-align-center slds-grid slds-theme--shade" style='padding-left:3%'>
+                             <a data-listindex = '{!index}' onclick='{!c.deleteClicked}' href="#" class=' slds-size--1-of-2 slds-medium-size--1-of-6 slds-large-size--4-of-12'>
+                                    <img data-listindex = '{!index}' src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/remove-from-list.png')}" height="25" width="25"/>
+                             </a>
+                            
+                                 <a onclick='{!c.addClicked}' href="#" class="{!(index+1 == v.allSymptomsList.length )? 'slds-size--1-of-2 slds-medium-size--1-of-6 slds-large-size--4-of-12':'slds-hide'}">
+                                    <img src="{!join(',',$Resource.RuleBuilderResources + '/RuleBuilderResources/Images/AddToList.png')}" height="25" width="25"/>
+                                </a>&nbsp;
+                           
+                      </div>
+                    </div>
+                    </span>
+                </aura:iteration>
+                </span>
+            </div>
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--left">
+                <div class="row sectionHeader">
+                    Gender
+                </div>
+                <div class="row">
+                    <div class="slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click slds-is-open">                
+                        <ui:inputSelect aura:id="GenderSelection" class="slds-picklist slds-input slds-dropdown-trigger slds-dropdown-trigger--click" change="{!c.genderSelectionChange}">
+                    <ui:inputSelectOption text="U" label="Unspecified"/>
+                            <aura:iteration items='{!v.allGenders}' var='gender'>
+                            	<ui:inputSelectOption text="{!gender.value}" label="{!gender.label}"/>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>  
+                </div>
+            </div>
+            <div class="slds-button-group slds-grid slds-grid--align-center" role="group">
+                <button class="slds-button slds-button--neutral" onclick='{!c.handleSubmit}'>Apply</button>
+                <button class="slds-button slds-button--neutral" onclick='{!c.handleReset}'>Reset</button>
+            </div>
+        </div>
+        <aura:if isTrue='{!v.isShowResults}'>
+        <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--4-of-6 slds-large-size--7-of-12">
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--center">
+                <div class="row sectionHeader">
+                    Diagnosis List
+                </div>
+                <div class="row">
+                    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="ICD Code">ICD Code</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="ICD Description">ICD Description</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items='{!v.smartResponse.lstPossibleDiagnosis}' var='diagnosis'>
+                            <tr>
+                                <th scope="row" data-label="ICD">
+                                    <div class="slds-truncate" title="ICD">{!diagnosis.ICD}</div>
+                                </th>
+                                <td data-label="ICD Description">
+                                    <div class="slds-truncate WrapText" title="ICD Description">{!diagnosis.ICDDescription}</div>
+                                </td>                              
+                            </tr>
+                            </aura:iteration>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--center">
+                <div class="row sectionHeader">
+                    Evaluated Rules
+                </div>
+                <div class="row">
+                    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Rule ID">Rule Id</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Rule Description">Description</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Evaluated">Evaluated</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <aura:iteration items='{!v.smartResponse.lstRulesEvaluated}' var='rule'>
+                            <tr class="{! (rule.result)? 'row-highlighted' : ''}">
+                                <th scope="row" data-label="ID" >
+                                    <div class="{! (rule.result)? 'sectionHeader slds-truncate' : 'slds-truncate'}" title="{!rule.externalId}">{!rule.externalId}</div>
+                                </th>
+                                <td data-label="Rule Description">
+                                    <div class="{! (rule.result)? 'sectionHeader slds-cell-wrap' : 'slds-cell-wrap'}" title="{!rule.ruleDescription}">{!rule.ruleDescription}</div>
+                                </td> 
+                                <td data-label="Rule Result">
+                                    <div class="{! (rule.result)? 'sectionHeader slds-truncate' : 'slds-truncate'}" title="{!rule.result}">{!rule.result}</div>
+                                </td> 
+                            </tr>
+                            </aura:iteration>
+                       </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="slds-grid--vertical slds-box slds-box--small slds-text-align--center">
+                <div class="row sectionHeader">
+                    Evaluated Conditions
+                </div>
+                <div class="row">
+                    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Combination Id">Combination Id</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Combination">Combination</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Description">Description</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Evaluated">Evaluated</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items='{!v.smartResponse.lstCombinationsEvaluated}' var='comb'>
+                             <tr>
+                                <th scope="row" data-label="{!comb.externalId}">
+                                    <div class="slds-truncate" title="{!comb.externalId}">{!comb.externalId}</div>
+                                </th>
+                                <td data-label="{!comb.ruleCombination}">
+                                    <div class="slds-cell-wrap" title="{!comb.ruleCombination}">{!comb.ruleCombination}</div>
+                                </td> 
+                                <td data-label="{!comb.ruleDescription}">
+                                    <div class="slds-cell-wrap" title="{!comb.ruleDescription}">{!comb.ruleDescription}</div>
+                                </td> 
+                                <td data-label="{!comb.result}">
+                                    <div class="slds-truncate" title="{!comb.result}">{!comb.result}</div>
+                                </td> 
+                            </tr>
+                          </aura:iteration>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </aura:if>
+    </div>
+       
+</aura:component>

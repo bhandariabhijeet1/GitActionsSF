@@ -1,0 +1,15 @@
+.THIS .slds-button__icon{
+    fill : #FFFFFF;
+}
+.THIS .slds-show--inline-block{
+    min-width : auto!important;
+}
+
+.THIS .slds-show--inline-block.slds-notify--toast {
+     width: auto;
+    min-width: 0;    
+}
+
+.THIS .right-padding {
+    padding-right: 2%;
+}

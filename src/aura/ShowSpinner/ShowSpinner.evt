@@ -1,0 +1,1 @@
+<aura:event type="APPLICATION" description="Event for hiding the App level Spinner which disables the backgroung" />

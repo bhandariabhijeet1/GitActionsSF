@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template" >
+     <aura:attribute name="ruleObj" type="Object"/>
+     <aura:attribute name="eventType" type="String"/>
+     <aura:attribute name='preAction' type="String"/>
+</aura:event>

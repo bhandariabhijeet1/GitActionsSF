@@ -1,0 +1,132 @@
+<aura:component controller="RuleBuilderController" >
+    <aura:attribute name='ruleId' type='String'/> 
+    
+    <aura:attribute name='rule' type='Rule_Library__c' default="{'sobjectType': 'Rule_Library__c'}"/> 
+    <aura:attribute name='ruleType' type='String'/> 
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="RuleActionEvent" type="c:RuleActions"/>
+    
+    <div aura:id ='buttonSection' class='show-buttons'>
+        <button class="slds-button slds-button--neutral" onclick = '{!c.editRule}'>Edit Rule</button>
+        <button class="slds-button slds-button--neutral" onclick = '{!c.cancel}'>Back</button>
+    </div>
+    <div class="slds-form new-rule-form">
+        
+        <table class="slds-table slds-m-top--small slds-table--fixed-layout">  
+            <tr>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+                        <div class="slds-form-element__control">    
+                            <label class="slds-form-element__label" for="select-01">Type</label>                                      					                      				
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1">
+                        <ui:outputText value="{!v.ruleType}"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1 slds-text-align--right">
+                        <div class="slds-form-element__control">
+                            <label class="slds-form-element__label" for="select-01">Gender</label> 
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1">
+                        <div class="slds-form-element__control">                           						
+                            <ui:outputText value="{!v.rule.Rule_Gender__c}"/>
+                        </div>
+                    </div>
+                </td>            
+                <td>  <label class="slds-form-element__label" for="text-input-ICDText">
+                    Active </label>    
+                    <ui:outputCheckbox value="{!v.rule.is_Active__c}"/>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="slds-form-element padding-top-small width-2of2 slds-text-align--right">
+                        <div class="slds-form-element__control">
+                            <label class="slds-form-element__label" for="text-input-01">
+                                <abbr class="slds-required" title="required">*</abbr> Symptom</label>
+                        </div>
+                    </div>
+                </td>  
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1">
+                        <ui:outputText value="{!v.rule.Rule_Field__c}"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1">
+                        <div class="slds-form-element__control slds-text-align--right">
+                            <label class="slds-form-element__label" for="text-input-01">
+                                <abbr class="slds-required" title="required">*</abbr> Operator</label>              		
+                        </div> 
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element padding-top-small width-1of1">
+                        <div class="slds-form-element__control">
+                            <ui:outputText value='{!v.rule.Rule_Operator__c}' />
+                            
+                        </div> 
+                    </div>
+                </td>
+                <td>
+                    <div class="slds-form-element is-required" >  		    	
+                        <td>
+                            <label class="slds-form-element__label" for="text-input-01">
+                                <abbr class="slds-required" title="required">*</abbr> Value</label> 
+                        </td>
+                        <td>
+                            <div class="slds-form-element slds-cell-wrap is-required width-10of10" > 
+                                <span class='slds-cell-wrap'>
+                                    <ui:outputText value='{!v.rule.Rule_Value__c}'/>
+                                </span>
+                            </div>
+                            
+                            <aura:if isTrue="{!v.rule.Multiple_Value_Count__c != '' &amp;&amp; v.rule.Multiple_Value_Count__c !=null}">
+                                <br/>Any <b> {!v.rule.Multiple_Value_Count__c } </b> &nbsp; of above values.
+                            </aura:if>
+                        </td>                        
+                    </div>
+                    
+                </td>
+                
+            </tr>
+            <tr>
+                <td>
+                    <div class="slds-form-element is-required width-1of1 padding-top-small slds-text-align--right" >
+                        <label class="slds-form-element__label" for="text-input-ICDText">
+                            ICD </label>    			
+                    </div>
+                </td>
+                <td>
+                    <span class="slds-form-element is-required width-1of1 padding-top-small" >                
+                        <ui:outputText value='{!v.rule.Rule_ICD__c}' /> </span>
+                    
+                </td>
+                <td>
+                    <div class="slds-form-element is-required width-2of2 padding-top-small slds-text-align--right" >
+                        <label class="slds-form-element__label" for="text-input-ICDDescText">
+                            ICD Description</label>    			
+                    </div>
+                </td>
+                <td>
+                    <div style="width:300%;" class="slds-form-element is-required width-2of2 padding-top-small" >  		    	
+                        <ui:outputTextArea value='{!v.rule.Rule_Diagnosis__c}'/>
+                    </div>
+                </td>
+                <TD></TD>
+                <td></td>
+            </tr>
+            
+        </table>
+    </div>
+    
+</aura:component>

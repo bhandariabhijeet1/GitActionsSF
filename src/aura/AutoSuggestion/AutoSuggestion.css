@@ -1,0 +1,15 @@
+.THIS {
+	font-weight: bold;
+}
+
+.THIS .hcc-auto {
+    float: right;
+}
+
+.THIS .rounded {
+    border-radius: 5px;
+    background: orange;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-weight: bold;
+}

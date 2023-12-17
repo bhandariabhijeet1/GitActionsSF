@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Activate_Account_Access</name>
+        <label>Activate Account Access</label>
+        <locationX>305</locationX>
+        <locationY>111</locationY>
+        <actionName>activateSessionPermSet</actionName>
+        <actionType>activateSessionPermSet</actionType>
+        <inputParameters>
+            <name>PermSetName</name>
+            <value>
+                <elementReference>AccountsAccessPermSet</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>activateSessionPermSet</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <constants>
+        <name>AccountsAccessPermSet</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Temporary_Account_Edit</stringValue>
+        </value>
+    </constants>
+    <interviewLabel>Accounts Temp Access {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Accounts Temp Access</label>
+    <processType>Flow</processType>
+    <startElementReference>Activate_Account_Access</startElementReference>
+    <status>Active</status>
+</Flow>

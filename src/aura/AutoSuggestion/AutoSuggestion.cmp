@@ -1,0 +1,30 @@
+<aura:component >
+    <!-- To Register Component Event-->
+    <aura:registerEvent name="AutosuggestionEvent" type="c:AutoSuggestionEvent" access='public'/>
+    
+    <aura:attribute name="AutoResults" type="String[]" />
+    <aura:attribute name="listIndex" type="Integer" />
+    
+    <span>
+        
+    <aura:iteration items="{!v.AutoResults}" var="Record" >
+       	<span>
+           <div class="slds-lookup__item">
+                    <a data-symptom="{!Record}"  onclick="{!c.ClickFunc}">
+						<table>
+                        <tr>
+                            <td>
+						<b>
+                        	{!Record}
+                        </b>
+                            </td>
+
+                            </tr>
+                                    </table>
+                    </a>
+                </div> 
+
+        </span>
+    </aura:iteration>
+    </span>
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" >
+      <aura:attribute name="ACTION" type="String"/>
+      <aura:attribute name="isConfirm" type="Boolean"/>
+</aura:event>

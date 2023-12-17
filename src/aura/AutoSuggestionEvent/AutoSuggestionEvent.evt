@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" access="public" description="Event template">
+    <aura:attribute name="ISymtom" type="String"/>
+     <aura:attribute name="listIndex" type="Integer" />
+</aura:event>

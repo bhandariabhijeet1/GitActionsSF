@@ -1,0 +1,12 @@
+.THIS {
+}
+.THIS .table-header-row {
+   line-height: 16px;
+   background-color: #EFEFEE;
+}
+.THIS .my-table--striped tr:nth-child(even) {
+      background-color: #EFEFEE;
+}
+.THIS .category-table {
+    border: 1px solid #B7B7B7 !important;
+}

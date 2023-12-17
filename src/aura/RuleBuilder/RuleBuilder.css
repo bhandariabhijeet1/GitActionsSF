@@ -1,0 +1,53 @@
+.THIS {
+    padding : 1%;
+}
+.THIS .new-rule-form {
+	  /*  border : 1px solid #d8dde6;*/
+}
+.THIS .width-5of10 {
+    width: 50% !important;
+}
+.THIS .width-2of10 {
+    width: 20% !important;
+}
+.THIS .width-1of10 {
+    width: 10% !important;
+}
+.THIS .header1 {
+    font-weight: 100;
+    font-size: 1.5em;
+}
+.THIS .padding-top-small {
+        padding-top: 1%;
+}
+.THIS .button-div {
+    text-align: center;
+    padding-top: 5%;
+}
+.THIS .display-rule {
+    line-height : 140%;
+    background-color: #EFEFEE;
+     text-align: center;
+}
+.THIS .with-pointer {
+    cursor: pointer;
+}
+.THIS .multicount {
+    width: 36% !important; 
+    padding-right: 0% !important;
+}
+.THIS .uiInputDefaultError .form-element__help {
+    margin-top: 0rem !important;
+}
+.THIS .AutoSuggestImagePosition{
+    right: 15px !important;
+    top: 15px !important;
+}
+.THIS .invalidrule-div {
+    text-align: center;
+    color: red;
+}
+
+.THIS .lookup-td {
+     padding: .1rem;
+}

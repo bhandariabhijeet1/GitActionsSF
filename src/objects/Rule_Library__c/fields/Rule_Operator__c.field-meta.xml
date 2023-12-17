@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rule_Operator__c</fullName>
+    <externalId>false</externalId>
+    <label>Rule Operator</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>=</fullName>
+                <default>false</default>
+                <label>=</label>
+            </value>
+            <value>
+                <fullName>!=</fullName>
+                <default>false</default>
+                <label>!=</label>
+            </value>
+            <value>
+                <fullName>&gt;</fullName>
+                <default>false</default>
+                <label>&gt;</label>
+            </value>
+            <value>
+                <fullName>&gt;=</fullName>
+                <default>false</default>
+                <label>&gt;=</label>
+            </value>
+            <value>
+                <fullName>&lt;</fullName>
+                <default>false</default>
+                <label>&lt;</label>
+            </value>
+            <value>
+                <fullName>&lt;=</fullName>
+                <default>false</default>
+                <label>&lt;=</label>
+            </value>
+            <value>
+                <fullName>STARTS WITH</fullName>
+                <default>false</default>
+                <label>STARTS WITH</label>
+            </value>
+            <value>
+                <fullName>CONTAINS</fullName>
+                <default>false</default>
+                <label>CONTAINS</label>
+            </value>
+            <value>
+                <fullName>:</fullName>
+                <default>false</default>
+                <label>:</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Under Treatment</fullName>
+                <default>false</default>
+                <label>Under Treatment</label>
+            </value>
+            <value>
+                <fullName>New Wound/Ulcer</fullName>
+                <default>false</default>
+                <label>New Wound/Ulcer</label>
+            </value>
+            <value>
+                <fullName>Unable to Assess</fullName>
+                <default>false</default>
+                <label>Unable to Assess</label>
+            </value>
+            <value>
+                <fullName>Entered in Error</fullName>
+                <default>false</default>
+                <label>Entered in Error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

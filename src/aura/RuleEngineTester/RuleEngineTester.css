@@ -1,0 +1,29 @@
+.THIS .MultiSelectPickList {
+    width: 170px;
+    height: 70px;
+    overflow:auto;
+}
+
+.THIS .row{
+    padding:5px;
+}
+
+.THIS .sectionHeader{
+    font-weight: bold;
+}
+
+.THIS .slds-picklist{
+    min-width: 170px;
+}
+.THIS .row-highlighted {
+    background-color: #f4f6f9;
+    border: 1px solid #d8dde6;
+   
+}
+.THIS .AutoSuggestImagePosition{
+    right: 15px !important;
+    top: 25px !important;
+}
+.THIS .WrapText{
+    white-space: normal !important;
+}

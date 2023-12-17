@@ -1,0 +1,7 @@
+<aura:event type="COMPONENT" description="Event template" >
+    <aura:attribute name='RESULT' type='boolean'/>
+    <aura:attribute name='ACTION' type='String'/>
+    <aura:attribute name='RULEID' type='String'/>
+    <aura:attribute name='preAction' type='String'/>
+    <aura:attribute name='ISRULE' type='boolean'/>
+</aura:event>

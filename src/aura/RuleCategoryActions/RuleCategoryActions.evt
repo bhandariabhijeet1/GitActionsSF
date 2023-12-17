@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="Event template" >
+    <aura:attribute name='ACTION' type='String'/>
+    <aura:attribute name='CATEGORY-TYPE' type='String'/>
+    <aura:attribute name='CATEGORY' type='Object'/>
+</aura:event>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CT Columns</label>
+    <protected>false</protected>
+    <values>
+        <field>value__c</field>
+        <value xsi:type="xsd:string">Medication_DB__c,Medication_DB__r.Generic_Product_ID__c, Status__c, RecordType.DeveloperName, Prescribed_Date__c, Discontinued_Date__c</value>
+    </values>
+</CustomMetadata>
